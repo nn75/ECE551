@@ -1,0 +1,214 @@
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+
+#include "set.h"
+
+template<typename T>
+class BstSet : public Set<T>
+{
+ private:
+  class Node
+  {
+   public:
+    T key;
+    Node * left;
+    Node * right;
+    Node(const T & k) : key(k), left(NULL), right(NULL) {}
+  };
+  Node * root;
+
+ public:
+  BstSet() : root(NULL) {}
+
+  //Copy constructor.
+  Node * copy(const Node * n) {
+    if (n == NULL) {
+      return NULL;
+    }
+    Node * newNode = new Node(n->key);
+    if (n->left != NULL) {
+      newNode->left = copy(n->left);
+    }
+    if (n->right != NULL) {
+      newNode->right = copy(n->right);
+    }
+    return newNode;
+  }
+  BstSet(const BstSet<T> & rhs) : root(NULL) { root = copy(rhs.root); }
+  BstSet<T> & operator=(const BstSet<T> & rhs) {
+    if (this != &rhs) {
+      destroy(root);
+      root = copy(rhs.root);
+    }
+    return *this;
+  }
+
+  //Add
+  virtual void add(const T & key) {
+    Node * curr = root;
+    Node * toAdd = new Node(key);
+    while (curr != NULL) {
+      if (key < curr->key) {
+        if (curr->left == NULL) {
+          curr->left = toAdd;
+          return;
+        }
+        else {
+          curr = curr->left;
+        }
+      }
+      else if (key > curr->key) {
+        if (curr->right == NULL) {
+          curr->right = toAdd;
+          return;
+        }
+        else {
+          curr = curr->right;
+        }
+      }
+      else {
+        curr->key = key;
+        delete toAdd;
+        return;
+      }
+    }
+    root = toAdd;
+  }
+
+  //Lookup
+  virtual bool contains(const T & key) const {
+    Node * curr = root;
+    while (curr != NULL) {
+      if (key == curr->key) {
+        return true;
+      }
+      else if (key < curr->key) {
+        curr = curr->left;
+      }
+      else {
+        curr = curr->right;
+      }
+    }
+    return false;
+  }
+
+  //Remove
+  virtual void remove(const T & key) {
+    Node * curr = root;
+    Node * parent = root;
+    while (curr != NULL) {
+      if (curr->key < key) {
+        if (curr->right == NULL) {
+          exit(EXIT_FAILURE);
+        }
+        else {
+          parent = curr;
+          curr = curr->right;
+        }
+      }
+      else if (curr->key > key) {
+        if (curr->left == NULL) {
+          exit(EXIT_FAILURE);
+        }
+        else {
+          parent = curr;
+          curr = curr->left;
+        }
+      }
+      else {
+        if (curr->left == NULL && curr->right == NULL) {
+          if (parent->left == curr) {
+            parent->left = NULL;
+          }
+          else if (parent->right == curr) {
+            parent->right = NULL;
+          }
+          else {
+            root = NULL;
+          }
+          delete curr;
+          return;
+        }
+        else if (curr->left == NULL && curr->right != NULL) {
+          if (parent->left == curr) {
+            parent->left = curr->right;
+          }
+          else if (parent->right == curr) {
+            parent->right = curr->right;
+          }
+          else {
+            root = curr->right;
+          }
+          delete curr;
+          return;
+        }
+        else if (curr->left != NULL && curr->right == NULL) {
+          if (parent->right == curr) {
+            parent->right = curr->left;
+          }
+          else if (parent->left == curr) {
+            parent->left = curr->left;
+          }
+          else {
+            root = curr->left;
+          }
+          delete curr;
+          return;
+        }
+        else {
+          Node * temp = curr->left;
+          Node * temp_parent = temp;
+          while (temp->right != NULL) {
+            temp_parent = temp;
+            temp = temp->right;
+          }
+          if (temp_parent == temp) {
+            temp->right = curr->right;
+            if (parent->left == curr) {
+              parent->left = temp;
+            }
+            else if (parent->right == curr) {
+              parent->right = temp;
+            }
+            else {
+              root = temp;
+            }
+          }
+          else {
+            temp_parent->right = temp->left;
+            temp->left = curr->left;
+            temp->right = curr->right;
+            if (parent->left == curr) {
+              parent->left = temp;
+            }
+            else if (parent->right == curr) {
+              parent->right = temp;
+            }
+            else {
+              root = temp;
+            }
+          }
+          delete curr;
+          return;
+        }
+      }
+    }
+  }
+  virtual ~BstSet<T>() { destroy(root); }
+  void destroy(Node * n) {
+    if (n != NULL) {
+      destroy(n->left);
+      destroy(n->right);
+      delete n;
+    }
+  }
+  void printInorder(Node * n) {
+    if (n != NULL) {
+      printInorder(n->left);
+      std::cout << n->key << " " << std::endl;
+      printInorder(n->right);
+    }
+  }
+  Node * getRoot() { return root; }
+};

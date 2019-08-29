@@ -1,0 +1,55 @@
+Grading at 09/25/2018:18:20:07.796621
+For commit ID 15db7a263d63ff134a881db1d158fdbca60e3614
+[32mSuccessfully compiled ['encrypt.c'].[0m
+********************test case 1********************
+Exit status of your code: 0
+[31mtest case 1 Error: valgrind was not clean,here are error suggestions:[0m
+[31m1 Invalid write of size 1[0m
+[31m2  Address 0x522d2cc is 0 bytes after a block of size 28 alloc[0m
+[31m3 Syscall param openat[0m
+[31m4 Conditional jump or move depends on uninitialised value[0m
+[32mCorrect: your output matched the expected output.[0m
+[32mpassed test case 1[0m
+********************test case 2********************
+Exit status of your code: 1
+[32mValgrind was clean[0m
+[32mCorrect: your code indicates this is a failure case.[0m
+[32mpassed test case 2[0m
+********************test case 3********************
+Exit status of your code: 0
+[31mtest case 3 Error: valgrind was not clean,here are error suggestions:[0m
+[31m1 Invalid write of size 1[0m
+[31m2  Address 0x522d2cc is 0 bytes after a block of size 28 alloc[0m
+[31m3 Syscall param openat[0m
+[31m4 Conditional jump or move depends on uninitialised value[0m
+[32mCorrect: your output matched the expected output.[0m
+[32mpassed test case 3[0m
+********************test case 4********************
+Exit status of your code: 0
+[31mtest case 4 Error: valgrind was not clean,here are error suggestions:[0m
+[31m1 Invalid write of size 1[0m
+[31m2  Address 0x522d2cc is 0 bytes after a block of size 28 alloc[0m
+[31m3 Syscall param openat[0m
+[31m4 Conditional jump or move depends on uninitialised value[0m
+[32mCorrect: your output matched the expected output.[0m
+[32mpassed test case 4[0m
+********************test case 5********************
+Exit status of your code: 0
+[31mtest case 5 Error: valgrind was not clean,here are error suggestions:[0m
+[31m1 Invalid write of size 1[0m
+[31m2  Address 0x522d2cc is 0 bytes after a block of size 28 alloc[0m
+[31m3 Syscall param openat[0m
+[31m4 Conditional jump or move depends on uninitialised value[0m
+[32mCorrect: your output matched the expected output.[0m
+[32mpassed test case 5[0m
+********************test case 6********************
+Exit status of your code: 0
+[31mtest case 6 Error: valgrind was not clean,here are error suggestions:[0m
+[31m1 Invalid write of size 1[0m
+[31m2  Address 0x522d2cc is 0 bytes after a block of size 28 alloc[0m
+[31m3 Syscall param openat[0m
+[31m4 Conditional jump or move depends on uninitialised value[0m
+[32mCorrect: your output matched the expected output.[0m
+[32mpassed test case 6[0m
+[32msuccessfully passed all 6 test cases[0m
+Overall Grade: A

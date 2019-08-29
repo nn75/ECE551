@@ -1,0 +1,9 @@
+Grading at 10/12/2018:06:06:59.115632
+For commit ID b66ef03fd44ac720d3c2d70219266749aa7e8dd9
+Attempting to compile:
+g++ -Wall -Werror -o code code.cpp
+Your Makefile produced a binary called 'code'
+Your file matched the expected output
+Your output matched what we expected
+
+Overall Grade: PASSED
